@@ -2,9 +2,12 @@
 
 __author__ = 'aitormf'
 
-import sys, os
+import logging
+import os
 import yaml
 from .properties import Properties
+
+LOGGER = logging.getLogger(__name__)
 
 
 def findConfigFile(filename):
@@ -45,7 +48,7 @@ def load(filename):
     filepath = findConfigFile(filename)
     prop= None
     if (filepath):
-        print ('loading Config file %s' %(filepath))
+        LOGGER.info("Loading Config file %s", filepath)
 
         with open(filepath, 'r') as stream:
             cfg=yaml.load(stream, Loader=yaml.FullLoader)
