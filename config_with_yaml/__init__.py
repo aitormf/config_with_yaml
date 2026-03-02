@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-__author__ = 'aitormf'
+__author__ = "aitormf"
 
-__versio__ = 0.1
+__version__ = "0.1.0"
 
 
 name = "config_with_yaml"
@@ -10,4 +10,3 @@ name = "config_with_yaml"
 from .config import *
 
 from .properties import Properties
-
