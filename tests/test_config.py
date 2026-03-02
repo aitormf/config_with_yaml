@@ -80,7 +80,7 @@ class TestLoad:
         with pytest.raises(ValueError) as exc_info:
             config.load("nonexistent_file_12345.yml")
 
-        assert "could not being found" in str(exc_info.value)
+        assert "could not be found" in str(exc_info.value)
 
     def test_load_returns_properties_object(self, tmp_path):
         test_file = tmp_path / "test.yml"

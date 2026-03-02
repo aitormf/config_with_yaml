@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
 
-__author__ = 'aitormf'
+__author__ = "aitormf"
 
 import logging
 import os
+import warnings
 import yaml
 from .properties import Properties
+from .loader import Loader
 
 LOGGER = logging.getLogger(__name__)
 
 
 def findConfigFile(filename):
-    '''
+    """
     Returns filePath or None if it couldn't find the file
 
     @param filename: Name of the file
@@ -20,22 +22,19 @@ def findConfigFile(filename):
 
     @return String with path or None
 
-    '''
-    paths = "."
-    config_paths = os.getenv("YAML_CONFIG_PATHS")
-    if config_paths:
-        paths = paths+":"+config_paths
+    """
+    warnings.warn(
+        "config.findConfigFile() is deprecated, use Loader.find_config_file() instead.",
+        DeprecationWarning,
+        stacklevel=2,
+    )
 
-    for path in paths.split(":"):
-        file_path = os.path.join(path, filename)
-        if os.path.exists(file_path):
-            return file_path
-
-    return None
+    loader = Loader()
+    return loader.find_config_file(filename)
 
 
 def load(filename):
-    '''
+    """
     Returns the configuration as dict
 
     @param filename: Name of the file
@@ -44,17 +43,13 @@ def load(filename):
 
     @return a dict with propierties reader from file
 
-    '''
-    filepath = findConfigFile(filename)
-    prop= None
-    if (filepath):
-        LOGGER.info("Loading Config file %s", filepath)
+    """
+    warnings.warn(
+        "config.load() is deprecated, use Loader class instead. "
+        "Create a Loader instance and call load() on it.",
+        DeprecationWarning,
+        stacklevel=2,
+    )
 
-        with open(filepath, 'r') as stream:
-            cfg=yaml.load(stream, Loader=yaml.FullLoader)
-            prop = Properties(cfg) 
-    else:
-        msg = "Config file '%s' could not being found" % (filename)
-        raise ValueError(msg)
-
-    return prop
+    loader = Loader()
+    return loader.load(filename)

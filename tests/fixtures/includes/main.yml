@@ -1,0 +1,6 @@
+name: test_app
+version: 1.0
+
+database: !include database.yml
+
+features: !include settings.yml
